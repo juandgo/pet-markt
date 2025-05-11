@@ -1,0 +1,48 @@
+# version: '3.3'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: pet_markt_postgres #this is to put en instead o the ip
+    environment:
+      - POSTGRES_DB=pet_markt
+      - POSTGRES_USER=juan
+      - POSTGRES_PASSWORD=admin123
+    ports:
+      - '5432:5432'
+    volumes:
+      - /postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 5050:80
+    depends_on:
+      - postgres
+
+  # mysql:
+  #   image: mysql:5
+  #   environment:
+  #     - MYSQL_DATABASE=my_store
+  #     - MYSQL_USER=root
+  #     - MYSQL_ROOT_PASSWORD=admin123
+  #     - MYSQL_PORT=3307
+  #   ports:
+  #     - 3307:3307
+  #   volumes:
+  #     - /mysql_data:/var/lib/mysql
+
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   environment:
+  #     - PMA_HOST=mysql
+  #     - MYSQL_ROOT_PASSWORD=admin123
+  #   ports:
+  #     - 8080:80
+  #   depends_on:
+  #     - mysql
+
+
