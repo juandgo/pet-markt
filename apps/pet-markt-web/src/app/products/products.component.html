@@ -1,6 +1,13 @@
 <div class="container mx-auto px-4">
   <div class="mb-4">
     <!-- search input -->
+    <input
+      type="text"
+      class="input input-bordered w-full max-w-xs"
+      placeholder="Search products..."
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearch(searchTerm)"
+    />
   </div>
   <!-- <pre>{{ productStore | json }}</pre> -->
   @if(productStore.loading()) {
@@ -31,7 +38,7 @@
     <!-- loop over products -->
     @for(product of productStore.products(); track product.id) {
     <!-- {{ product | json }} -->
-    <app-product-card [product]="product"/>
+    <app-product-card (addToCart)="addToCart($event)" [product]="product" />
     }
   </div>
   }

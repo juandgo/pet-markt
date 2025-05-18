@@ -16,4 +16,11 @@ export const appRoutes: Route[] = [
             return mod.ProductsComponent;
         },
     },
+    {
+        path: 'cart',
+        loadComponent: async () => {
+            const mod = await import('./cart/cart.component');
+            return mod.CartComponent;
+        },
+    },
 ];

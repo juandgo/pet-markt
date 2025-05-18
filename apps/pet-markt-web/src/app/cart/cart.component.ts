@@ -1,0 +1,22 @@
+import { CartStore } from './../stores/cart.store';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-cart',
+  imports: [CommonModule, RouterLink],
+  templateUrl: './cart.component.html',
+  styleUrl: './cart.component.scss',
+})
+export class CartComponent {
+  cartStore = inject(CartStore);
+
+  updateQuantity(productId: string, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const quantity = parseInt(input.value, 10);
+    if (quantity > 0) {
+      this.cartStore.updateQuantity(productId, quantity);
+    }
+  }
+}
